@@ -2,7 +2,7 @@ const prompt=require("prompt-sync")();
 
 let Taxis = [ 
 { id: 1, position: 5, available: true, timeRemaining: 0, totalRides:0, destination:null  }, 
-{ id: 2, position: 12, available: true, timeRemaining:0, totalRides:0, destination:null }, 
+{ id: 2, position: 12, available: false, timeRemaining:0, totalRides:0, destination:null }, 
 { id: 3, position: 20, available: true, timeRemaining:0, totalRides:0, destination:null } 
 ];
 let Requests = [ 
@@ -72,19 +72,38 @@ Taxis.position == Request.position;
 for (let i = 0; i < Requests.length; i++) {
     console.log(ladureedetrajet(Requests[i]));
 }
+function filedattente(req){
+    let waitingQueue=[];
+    for(let i=0; i<Taxis.length;i++){
+        let t=Taxis[i];
+        if(t.available == false){
+            waitingQueue.push(req.reqId);
+        }
+        if(t.available==true){
+            t.timeRemaining=req.duration;
+            t.destination=req.position;
+            
+        }
+        // tab.push(`[taxi#${t.id}]-> request${req.reqId} (pos${req.position},dur${req.duration})`);
+        // return tab;
+    }return waitingQueue;
+    
+    
+    
 
-// for (let i=0; i<Taxis.length;i++){
-//     let tax= Taxis[i];
-//     if(!tax.available){
-//         tax.timeRemaining--;
 
-//         if(tax.timeRemaining==0){
-//             tax.available=true;
-//             tax.position=tax.destination;
-//             tax.destination=null;
-//         }
-//     }
-// }console.log(Taxis.destination);
+
+} for (let i = 0; i < Requests.length; i++) {
+    console.log(filedattente(Requests[i]));
+}
+
+
+pR++;
+console.log("--- Final Report ---" );
+let p=[];
+p.push("taxi : ",Taxis.id,": position : ",Requests.position," , trajets : ",pR,);
+console.log(p);
+
 
 
 
